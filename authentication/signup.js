@@ -32,6 +32,7 @@ const signup = async (req, res, next) => {
     conn.query(checkEmailQuery, [email], (err, result) => {
         if (err) throw err;
             // Handle the error
+            // Change in file
         else {
             if (result.length > 0) {
                 // Email already exists, handle accordingly
