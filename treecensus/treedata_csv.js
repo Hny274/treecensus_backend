@@ -39,7 +39,8 @@ const exportToCsv = async (req, res, next) => {
         });
 
         // Converting data to CSV format
-        const csvString = csvStringifier.stringifyRecords(csvData);
+        //const csvString = csvStringifier.stringifyRecords(csvData);
+        const csvString = csvStringifier.getHeaderString() + csvStringifier.stringifyRecords(csvData);
 
         // Sending the CSV string as a response
         res.setHeader('Content-Type', 'text/csv');
