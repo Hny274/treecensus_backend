@@ -18,7 +18,7 @@ The backend infrastructure of the Aurangabad Tree Census project is a critical c
 
 ## Authors
 
-- [@Hny274](https://github.com/Hny274)
+- [@Hunny Gandhi](https://github.com/Hny274)
 
 
 ## 🛠 Skills
