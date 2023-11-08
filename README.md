@@ -14,6 +14,7 @@ The backend infrastructure of the Aurangabad Tree Census project is a critical c
     3. Get all Tree Data
     4. Get Map Latitude and Longitude
     5. Download CSV file of Data
+    6. Confirm email-id through email
 
 
 ## Authors
