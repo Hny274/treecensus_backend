@@ -44,8 +44,8 @@ const exportToCsv = async (req, res, next) => {
 
         // Sending the CSV string as a response
         res.setHeader('Content-Type', 'text/csv');
-        res.setHeader('Content-Disposition', 'attachment; filename=tree_data.csv');
-        return res.status(200).send(csvString);
+        //res.setHeader('Content-Disposition', 'attachment; filename=tree_data.csv');
+        return res.status(200).attachment("treed.csv").send(csvString);
     });
 };
 

@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const conn = require("../db/connection");
-
+const {signupmail, signupnmail} = require("../email/email")
 // const signup = async (req, res, next) => {
 //     try {
 //         const { userid, first_name, last_name, email, password } = req.body;
@@ -27,7 +27,9 @@ const conn = require("../db/connection");
 // }
 
 const signup = async (req, res, next) => {
-    const { userid, first_name, last_name, email, password } = req.body;
+    let timestamp = Date.now();
+    console.log(timestamp);
+    const { userid, user_name, mobile, email, password } = req.body;
     const checkEmailQuery = "SELECT * FROM `userdata` WHERE email = ?";
     conn.query(checkEmailQuery, [email], (err, result) => {
         if (err) throw err;
@@ -40,18 +42,19 @@ const signup = async (req, res, next) => {
                 res.end();
             } else {
                 // Email doesn't exist, proceed with the insertion
-                const insertQuery = "INSERT INTO `userdata` (userid, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)";
-                conn.query(insertQuery, [userid, first_name, last_name, email, password], (err, result) => {
+                const insertQuery = "INSERT INTO `userdata` (userid, user_name, mobile, email, password, tocken) VALUES (?, ?, ?, ?, ?, ?)";
+                conn.query(insertQuery, [userid, user_name, mobile, email, password, timestamp], (err, result) => {
                     // Handle the insertion result
                     if (err) throw err;
                     else {
                         const userData = {
                             userid: userid,
-                            first_name: first_name,
-                            last_name: last_name,
+                            user_name:user_name,
+                            mobile:mobile,
                             email: email
                         };
                         res.json({ "status": "Success", "message": "User Created Successfully", "data": userData });
+                        signupnmail(email,user_name,timestamp);
                         res.end();
 
                 }
